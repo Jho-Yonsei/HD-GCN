@@ -1,3 +1,3 @@
 # HD-GCN
 
-123213
+Official Implementation of [Hierarchically Decomposed Graph Convolutional Networks for Skeleton-Based Action Recognition].
