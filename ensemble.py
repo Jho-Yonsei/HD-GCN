@@ -52,17 +52,17 @@ if __name__ == "__main__":
                 label.append(int(info['label']) - 1)
     elif 'ntu120' in arg.dataset:
         if 'xsub' in arg.dataset:
-            npz_data = np.load('../wacv/data/' + 'ntu120/' + 'NTU120_CSub.npz')
+            npz_data = np.load('./data/' + 'ntu120/' + 'NTU120_CSub.npz')
             label = np.where(npz_data['y_test'] > 0)[1]
         elif 'xset' in arg.dataset:
-            npz_data = np.load('../wacv/data/' + 'ntu120/' + 'NTU120_CSet.npz')
+            npz_data = np.load('./data/' + 'ntu120/' + 'NTU120_CSet.npz')
             label = np.where(npz_data['y_test'] > 0)[1]
     elif 'ntu' in arg.dataset:
         if 'xsub' in arg.dataset:
-            npz_data = np.load('../wacv/data/' + 'ntu/' + 'NTU60_CS.npz')
+            npz_data = np.load('./data/' + 'ntu/' + 'NTU60_CS.npz')
             label = np.where(npz_data['y_test'] > 0)[1]
         elif 'xview' in arg.dataset:
-            npz_data = np.load('../wacv/data/' + 'ntu/' + 'NTU60_CV.npz')
+            npz_data = np.load('./data/' + 'ntu/' + 'NTU60_CV.npz')
             label = np.where(npz_data['y_test'] > 0)[1]
     else:
         raise NotImplementedError
