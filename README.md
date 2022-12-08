@@ -6,4 +6,4 @@ Readme File will be updated soon.
 
 ## Pretrained Weights
 
-Pretrained weights for NTU RGB+D 60 and 120 can be downloaded from the following link [[Google Drive]](https://drive.google.com/drive/folders/1JgghCBO6-vobgkw-yei9Hoonc63P8fqD?usp=sharing).
+Pretrained weights for NTU RGB+D 60 and 120 can be downloaded from the following link [[Google Drive]](https://drive.google.com/drive/folders/1FB_IQdTMWE8cRvwE2KiyxC0P6LyqZku4?usp=sharing).
