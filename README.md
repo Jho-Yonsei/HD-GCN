@@ -120,7 +120,7 @@ python ensemble.py --datasets ntu120/xsub --main-dir ./work_dir/ntu120/cross-sub
 - Pretrained weights for NTU RGB+D 60 and 120 can be downloaded from the following link [[Google Drive]](https://drive.google.com/drive/folders/1FB_IQdTMWE8cRvwE2KiyxC0P6LyqZku4?usp=sharing).
 
 ## Acknowledgements
-This repo is based on [2s-AGCN](https://github.com/lshiwjx/2s-AGCN) and [CTR-GCN](https://github.com/Uason-Chen/CTR-GCN). The data processing is borrowed from [SGN](https://github.com/microsoft/SGN), [HCN](https://github.com/huguyuehuhu/HCN-pytorch).
+This repo is based on [2s-AGCN](https://github.com/lshiwjx/2s-AGCN) and [CTR-GCN](https://github.com/Uason-Chen/CTR-GCN). The data processing is borrowed from [SGN](https://github.com/microsoft/SGN) and [HCN](https://github.com/huguyuehuhu/HCN-pytorch).
 
 Thanks to the original authors for their awesome works!
 
@@ -135,3 +135,6 @@ Please cite this work if you find it useful:
   year={2022}
 }
 ```
+
+# Contact
+If you have any questions, feel free to contact: 2015142131@yonsei.ac.kr
