@@ -6,7 +6,7 @@ Official Implementation of [Hierarchically Decomposed Graph Convolutional Networ
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hierarchically-decomposed-graph-convolutional/skeleton-based-action-recognition-on-ntu-rgbd-1)](https://paperswithcode.com/sota/skeleton-based-action-recognition-on-ntu-rgbd-1?p=hierarchically-decomposed-graph-convolutional)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hierarchically-decomposed-graph-convolutional/skeleton-based-action-recognition-on-n-ucla)](https://paperswithcode.com/sota/skeleton-based-action-recognition-on-n-ucla?p=hierarchically-decomposed-graph-convolutional)
 
-![image](figures/framework.png)
+![image](figures/framework.PNG)
 
 # Abstract
 
