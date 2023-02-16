@@ -86,10 +86,13 @@ Put downloaded data into the following directory structure:
 ```
 # Example: training HD-GCN (joint CoM 1) on NTU RGB+D 60 cross subject with GPU 0
 python main.py --config ./config/nturgbd60-cross-subject/joint_com_1.yaml --device 0
+
 # Example: training HD-GCN (bone CoM 1) on NTU RGB+D 60 cross subject with GPU 0
 python main.py --config ./config/nturgbd60-cross-subject/bone_com_1.yaml --device 0
+
 # Example: training HD-GCN (joint CoM 1) on NTU RGB+D 120 cross subject with GPU 0
 python main.py --config ./config/nturgbd120-cross-subject/joint_com_1.yaml --device 0
+
 # Example: training HD-GCN (bone CoM 1) on NTU RGB+D 120 cross subject with GPU 0
 python main.py --config ./config/nturgbd120-cross-subject/bone_com_1.yaml --device 0
 ```
