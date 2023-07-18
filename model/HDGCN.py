@@ -57,7 +57,7 @@ def weights_init(m):
 class TemporalConv(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, dilation=1):
         super(TemporalConv, self).__init__()
-        pad = (kernel_size + (kernel_size-1) * (dilation-1) - 1) // 2
+        pad = (kernel_size + (kernel_size - 1) * (dilation - 1) - 1) // 2
         self.conv = nn.Conv2d(
             in_channels,
             out_channels,
@@ -95,7 +95,7 @@ class MultiScale_TemporalConv(nn.Module):
         if type(kernel_size) == list:
             assert len(kernel_size) == len(dilations)
         else:
-            kernel_size = [kernel_size]*len(dilations)
+            kernel_size = [kernel_size] * len(dilations)
         # Temporal Convolution branches
         self.branches = nn.ModuleList([
             nn.Sequential(
@@ -121,12 +121,12 @@ class MultiScale_TemporalConv(nn.Module):
             nn.Conv2d(in_channels, branch_channels, kernel_size=1, padding=0),
             nn.BatchNorm2d(branch_channels),
             nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=(3,1), stride=(stride,1), padding=(1,0)),
-            nn.BatchNorm2d(branch_channels)  # 为什么还要加bn
+            nn.MaxPool2d(kernel_size=(3, 1), stride=(stride, 1), padding=(1, 0)),
+            nn.BatchNorm2d(branch_channels)
         ))
 
         self.branches.append(nn.Sequential(
-            nn.Conv2d(in_channels, branch_channels, kernel_size=1, padding=0, stride=(stride,1)),
+            nn.Conv2d(in_channels, branch_channels, kernel_size=1, padding=0, stride=(stride, 1)),
             nn.BatchNorm2d(branch_channels)
         ))
 
@@ -237,7 +237,6 @@ class EdgeConv(nn.Module):
         return feature
     
 
-
 class AHA(nn.Module):
     def __init__(self, in_channels, num_layers, CoM):
         super(AHA, self).__init__()
@@ -267,20 +266,20 @@ class AHA(nn.Module):
         
         
         
-    def forward(self, x): # N C L T V -> N C L 1 1
+    def forward(self, x):
         N, C, L, T, V = x.size()
         
-        x_t = x.max(dim=-2, keepdim=False)[0] # N, C, L, V
-        x_t = self.conv_down(x_t) # N C/r L V
+        x_t = x.max(dim=-2, keepdim=False)[0]
+        x_t = self.conv_down(x_t)
         
         x_sampled = []
-        for i in range(self.num_layers): # Representative Average Pooling (RAP)
+        for i in range(self.num_layers):
             s_t = x_t[:, :, i, self.layers[i]]
-            s_t = s_t.mean(dim=-1, keepdim=True)# N, C/r, 1, 1
+            s_t = s_t.mean(dim=-1, keepdim=True)
             x_sampled.append(s_t)
-        x_sampled = torch.cat(x_sampled, dim=2) # N, C/r, L
+        x_sampled = torch.cat(x_sampled, dim=2)
         
-        att = self.edge_conv(x_sampled, dim=3) # N, C/r, L
+        att = self.edge_conv(x_sampled, dim=3)
         att = self.aggregate(att).view(N, C, L, 1, 1)
         
         out = (x * self.sigmoid(att)).sum(dim=2, keepdim=False)
@@ -292,8 +291,8 @@ class AHA(nn.Module):
 class HD_Gconv(nn.Module):
     def __init__(self, in_channels, out_channels, A, adaptive=True, residual=True, att=False, CoM=21):
         super(HD_Gconv, self).__init__()
-        self.num_layers = A.shape[0] # 6
-        self.num_subset = A.shape[1] # 3
+        self.num_layers = A.shape[0]
+        self.num_subset = A.shape[1]
         
         self.att = att
         
@@ -301,7 +300,7 @@ class HD_Gconv(nn.Module):
         self.adaptive = adaptive
         
         if adaptive:
-            self.PA = nn.Parameter(torch.from_numpy(A.astype(np.float32)), requires_grad=True) # L, 3, 25, 25
+            self.PA = nn.Parameter(torch.from_numpy(A.astype(np.float32)), requires_grad=True)
         else:
             raise ValueError()
 
@@ -363,13 +362,13 @@ class HD_Gconv(nn.Module):
                 y.append(z)
             y_edge = self.conv[i][-1](x_down)
             y.append(y_edge)
-            y = torch.cat(y, dim=1) # N C T V
+            y = torch.cat(y, dim=1)
             
             out.append(y)
             
-        out = torch.stack(out, dim=2) # N C L T V
+        out = torch.stack(out, dim=2)
         if self.att:
-            out = self.aha(out) # N C T V
+            out = self.aha(out)
         else:
             out = out.sum(dim=2, keepdim=False)
             
@@ -404,19 +403,15 @@ class TCN_GCN_unit(nn.Module):
 
 class Model(nn.Module):
     def __init__(self, num_class=60, num_point=25, num_person=2, graph=None, graph_args=dict(), in_channels=3,
-                 drop_out=0, adaptive=True, compute_flops=False):
+                 drop_out=0, adaptive=True):
         super(Model, self).__init__()
 
         if graph is None:
             raise ValueError()
-        elif compute_flops is False:
+        else:
             Graph = import_class(graph)
             self.graph = Graph(**graph_args)
             A, CoM = self.graph.A
-        else:
-            A, CoM = graph.A
-        
-        ## A : L, 3, 25, 25
         
         self.dataset = 'NTU' if num_point == 25 else 'UCLA'
 
