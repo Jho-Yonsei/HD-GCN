@@ -87,27 +87,7 @@ class Feeder(Dataset):
             for v1, v2 in ntu_pairs:
                 bone_data_numpy[:, :, v1 - 1] = data_numpy[:, :, v1 - 1] - data_numpy[:, :, v2 - 1]
             data_numpy = bone_data_numpy
-        # if self.vector:
-        #     data_numpy[:, :-1] = data_numpy[:, 1:] - data_numpy[:, :-1]
-        #     data_numpy[:, -1] = 0
-        # if self.derivative:
-        #     data_copy = deepcopy(data_numpy)
-        #     data_numpy = self.get_derivative(data_copy)
-
         return data_numpy, label, index
-    
-    # def get_derivative(self, x, h=1/30):
-    #     C, T, V, _ = x.shape
-    #     diff = np.zeros_like(x)
-    #     for t in range(T):
-    #         if t == 0 or t == 1:
-    #             diff[:, t] = (-25*x[:, t] + 48*x[:, t+1] - 36*x[:, t+2] + 16*x[:, t+3] - 3*x[:, t+4]) / (12 * h)
-    #         elif t == (T - 1) or t == (T - 2):
-    #             diff[:, t] = (25*x[:, t] - 48*x[:, t-1] + 36*x[:, t-2] - 16*x[:, t-3] + 3*x[:, t-4]) / (12 * h)
-    #         else:
-    #             diff[:, t] = (- x[:, t+2] + 8*x[:, t+1] - 8*x[:, t-1] + x[:, t-2]) / (12 * h)
-                
-    #     return diff
 
     def top_k(self, score, top_k):
         rank = score.argsort()
