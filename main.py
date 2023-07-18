@@ -294,15 +294,10 @@ class Processor():
         shutil.copy2(inspect.getfile(Model), self.arg.work_dir)
         print(Model)
         self.model = Model(**self.arg.model_args)
-        # print(self.model)
         if self.arg.loss_type == 'CE':
             self.loss = nn.CrossEntropyLoss().cuda(output_device)
-            # self.loss = LabelSmoothingCrossEntropy(smoothing=0.1).cuda(output_device)
         else:
             self.loss = LabelSmoothingCrossEntropy(smoothing=0.1).cuda(output_device)
-            
-        # if self.arg.start_epoch != 0:
-        #     self.arg.weights = os.path.join(self.arg.work_dir, )
 
         if self.arg.weights:
             self.global_step = int(arg.weights[:-3].split('-')[-1])
@@ -367,8 +362,6 @@ class Processor():
             if epoch < self.arg.warm_up_epoch:
                 lr = self.arg.base_lr * (epoch + 1) / self.arg.warm_up_epoch
             else:
-                # lr = self.arg.base_lr * (
-                #         self.arg.lr_decay_rate ** np.sum(epoch >= np.array(self.arg.step)))
                 T_max = len(self.data_loader['train']) * (self.arg.num_epoch - self.arg.warm_up_epoch)
                 T_cur = len(self.data_loader['train']) * (epoch - self.arg.warm_up_epoch) + idx
 
@@ -549,9 +542,6 @@ class Processor():
                         epoch + 1 == self.arg.num_epoch)) and (epoch+1) > self.arg.save_epoch
 
                 self.train(epoch, save_model=True)
-
-                # if epoch + 1 > 55:
-                    
                 self.eval(epoch, save_score=True, loader_name=['test'])
 
             # test the best model
