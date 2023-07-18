@@ -98,10 +98,8 @@ if __name__ == "__main__":
             dir_cnt += 2
 
     right_num = total_num = right_num_5 = 0
-    
-    def norm(x):
-        x_norm = x / x.std()
-        return x_norm
+
+    norm = lambda x: x / np.linalg.norm(x)
 
     if dir_cnt == 6:
         for i in tqdm(range(len(label))):
