@@ -21,13 +21,6 @@ if __name__ == "__main__":
                         required=True,
                         choices={'ntu/xsub', 'ntu/xview', 'ntu120/xsub', 'ntu120/xset', 'NW-UCLA'},
                         help='the work folder for storing results')
-    parser.add_argument('--alpha',
-                        default=1,
-                        help='weighted summation',
-                        type=float)
-    parser.add_argument('--alpha1',
-                        default=0.1,
-                        type=float)
     parser.add_argument('--main-dir',
                         help='')
     parser.add_argument('--CoM-2',
@@ -104,18 +97,12 @@ if __name__ == "__main__":
     if dir_cnt == 6:
         for i in tqdm(range(len(label))):
             l = label[i]
-            r11 = np.array(r1[i][1])
-            r22 = np.array(r2[i][1])
-            r33 = np.array(r3[i][1])
-            r44 = np.array(r4[i][1])
-            r55 = np.array(r5[i][1])
-            r66 = np.array(r6[i][1])
-            r11 = norm(r11)
-            r22 = norm(r22)
-            r33 = norm(r33)
-            r44 = norm(r44)
-            r55 = norm(r55)
-            r66 = norm(r66)
+            r11 = norm(np.array(r1[i][1]))
+            r22 = norm(np.array(r2[i][1]))
+            r33 = norm(np.array(r3[i][1]))
+            r44 = norm(np.array(r4[i][1]))
+            r55 = norm(np.array(r5[i][1]))
+            r66 = norm(np.array(r6[i][1]))
             r = r11 + r22 + r33 + r44 + r55 + r66
             rank_5 = r.argsort()[-5:]
             right_num_5 += int(int(l) in rank_5)
@@ -176,5 +163,3 @@ if __name__ == "__main__":
         acc5 = right_num_5 / total_num
     print('Top1 Acc: {:.4f}%'.format(acc * 100))
     print('Top5 Acc: {:.4f}%'.format(acc5 * 100))
-    print()
-    print('In Paper: {:.1f}%'.format(acc * 100))
