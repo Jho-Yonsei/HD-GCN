@@ -132,11 +132,13 @@ Thanks to the original authors for their awesome works!
 
 Please cite this work if you find it useful:
 ```BibTex
-@article{lee2022hierarchically,
-  title={Hierarchically Decomposed Graph Convolutional Networks for Skeleton-Based Action Recognition},
-  author={Lee, Jungho and Lee, Minhyeok and Lee, Dogyoon and Lee, Sangyoon},
-  journal={arXiv preprint arXiv:2208.10741},
-  year={2022}
+@InProceedings{Lee_2023_ICCV,
+    author    = {Lee, Jungho and Lee, Minhyeok and Lee, Dogyoon and Lee, Sangyoun},
+    title     = {Hierarchically Decomposed Graph Convolutional Networks for Skeleton-Based Action Recognition},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2023},
+    pages     = {10444-10453}
 }
 ```
 
